@@ -28,7 +28,7 @@
   }
 }
 .btn{
-  @apply  p-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200
+  @apply   px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-200
 }
 .form-control{
   @apply w-full outline-none  placeholder-gray-900 focus:border-none py-3 px-4 bg-gray-200 text-center rounded-lg   focus:outline-none 

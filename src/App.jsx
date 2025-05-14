@@ -13,11 +13,17 @@ import LectureDetails from "./pages/Student/LectureDetails/LectureDetails";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import SectionsOfSubjects from "./pages/Student/SectionsOfSubjects/SectionsOfSubjects";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 const queryClient = new QueryClient();
 
 function App() {
   const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <LandingPage/>,
+      index:true
+    },
     {
       path: "/login",
       element: (
@@ -57,7 +63,7 @@ function App() {
       <UserProvider>
         <RouterProvider router={router} />
       </UserProvider>
-      <ReactQueryDevtools initialIsOpen={false}/>
+      {/* <ReactQueryDevtools initialIsOpen={false}/> */}
     </QueryClientProvider>
   );
 }
