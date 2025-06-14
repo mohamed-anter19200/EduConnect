@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export async function sendDataToSignUp(values, navigate, setToken) {
+export async function sendDataToSignUp(values, navigate, setToken, toast) {
+  const loadingToastId = toast.loading("Signing up...");
   try {
     const option = {
       url: "https://graduation-project-lilac-five.vercel.app/users/signup",
@@ -9,19 +10,21 @@ export async function sendDataToSignUp(values, navigate, setToken) {
     };
 
     const { data } = await axios.request(option);
+    toast.dismiss(loadingToastId);
     if (data.message === "success") {
+      toast.success("Signed up successfully!");
       sessionStorage.setItem("Token",data.token)
       setToken(data.token);  
       navigate('/student');
-    } else {
-      console.log(data.message);
-    }
+    }  
   } catch (error) {
-    console.error("Error during signup:", error);
+    toast.dismiss(loadingToastId);
+    toast.error(error.response.data.msg);
   }
 }
 
-export async function sendDataToLogIn(values, navigate, setToken) {
+export async function sendDataToLogIn(values, navigate, setToken, setRole, toast) {
+  const loadingToastId = toast.loading("Logging in...");
   try {
     const option = {
       url: "https://graduation-project-lilac-five.vercel.app/users/login",
@@ -30,18 +33,37 @@ export async function sendDataToLogIn(values, navigate, setToken) {
     };
 
     const { data } = await axios.request(option);
-    if (data.message === "success") {
-      sessionStorage.setItem("Token",data.token)
-      setToken(data.token);
-      navigate('/student');
+    const { message, token, role } = data;
+    console.log(data);
+    toast.dismiss(loadingToastId);
+    if (message === "success") {
+      toast.success("Logged in successfully!");
+      sessionStorage.setItem("Token", token);
+      sessionStorage.setItem("Role", role);
+      setToken(token);
+      setRole(role);      
+      setTimeout(() => {
+        if (role === "admin") {
+          navigate('/admin', { replace: true });
+        } else if (role === "student") {
+          navigate('/student', { replace: true });
+        } else if ( role == "doctor" ) {
+          navigate('/lecturer', { replace: true });
+        } else {
+          console.log("role not found");
+        }
+      }, 50);
     }
-  } catch (data) {
-    console.error("Error during login:", data.message);
+  } catch (error) {
+    toast.dismiss(loadingToastId);
+    toast.error("Error during login!");
+    console.error("Error during login:", error);
   }
 }
 
+
 export function logout(navigate, setToken) {
-  localStorage.clear()
+  sessionStorage.clear()
   setToken(null);
   navigate("/login", { replace: true });
 }

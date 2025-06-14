@@ -3,8 +3,8 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import VideoPlayer from "../../../components/VideoPlayer/VideoPlayer";
 import FilePlayer from "../../../components/FilePlayer/FilePlayer";
 import LectureCard from "../../../components/LectureCard/LectureCard";
-import useLectureDetails from "../../../hooks/useLectureDetails"; 
-import useAllLectures from "../../../hooks/useAllLectures"; 
+import useLectureDetails from "../../../hooks/Student/useLectureDetails";
+import useAllLectures from "../../../hooks/Student/useAllLectures";
 
 export default function LectureDetails() {
   const { lectureId } = useParams();

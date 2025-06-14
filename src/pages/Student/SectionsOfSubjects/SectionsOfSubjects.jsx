@@ -3,7 +3,7 @@ import { getSectionsOfSubject } from "../../../API/Student/Student";
 import { useParams } from "react-router-dom";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import LectureCard from "../../../components/LectureCard/LectureCard";
-import useSectionsOfSubject from "../../../hooks/useSectionsOfsubjects";
+import useSectionsOfSubject from "../../../hooks/Student/useSectionsOfSubjects";
 
 export default function SectionsOfSubjects() {
   const { SubjectId } = useParams();

@@ -10,7 +10,7 @@ export async function getAllSubjects() {
     };
 
     const { data } = await axios.request(option);
-    
+    console.log("Subjects : ")
     if (data.message === "success") {
       console.log(data)
        return data.subjects
@@ -31,15 +31,14 @@ export async function getAllLectures(id) {
     };
     const { data } = await axios.request(options);
 
+    console.log((data));
+    
     const { message } = data;
 
     if (message === "success") {
       console.log(data);
       return data;
-    } else {
-      console.warn("Unexpected API response:", data);
-      return [];
-    }
+    }  
   } catch (error) {
     console.error("Failed to fetch lectures:", error);
     return [];
@@ -78,8 +77,7 @@ export async function getAllSections() {
    };
 
    const { data } = await axios.request(option);
-   
-   if (data.message === "success") {    
+    if (data.message === "success")  {    
       return data.subjects
    }
  } catch (data) {
@@ -128,9 +126,11 @@ export async function  getNewest() {
    };
 
    const { data } = await axios.request(option);
+   console.log("Newest Upload : ");
+   
    console.log(data);
    
-   if (data.message === "success") {    
+   if (data.message === "success") {        
       return data.videos
    }
  } catch (data) {

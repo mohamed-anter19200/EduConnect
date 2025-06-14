@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import useAllLectures from '../../../hooks/useAllLectures';   
+import useAllLectures from '../../../hooks/Student/useAllLectures';   
 import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 import LectureCard from '../../../components/LectureCard/LectureCard';
 

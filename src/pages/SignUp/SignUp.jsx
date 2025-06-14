@@ -4,13 +4,15 @@ import * as Yup from "yup";
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import {sendDataToSignUp} from '../../API/Auth/Auth'
+import { sendDataToSignUp } from '../../API/Auth/Auth';
 import { useContext } from "react";
 import { userContext } from "../../context/User.context";
+import toast from 'react-hot-toast';
 
 export default function SignUp() {
   const navigate = useNavigate();
-   const {setToken} = useContext(userContext)
+  const { setToken } = useContext(userContext);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -24,16 +26,16 @@ export default function SignUp() {
       email: Yup.string().required("Email is required").email("Email is invalid"),
       password: Yup.string().required("Password is required").min(8, "Password must be at least 8 characters"),
     }),
-   onSubmit: (values) => sendDataToSignUp(values, navigate,setToken), 
+    onSubmit: (values) => sendDataToSignUp(values, navigate, setToken, toast),
   });
 
   return (
     <>
       <div className="h-screen bg-gray-50 flex justify-center items-center">
-         <motion.div
+        <motion.div
           className="container w-[90%] mx-auto md:w-1/3 bg-white md:p-8 p-5 rounded-lg shadow-2xl"
-          initial={{ opacity: 0, y: -300 }} 
-          animate={{ opacity: 1, y: 0 }}  
+          initial={{ opacity: 0, y: -300 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <h2 className="text-center text-2xl font-semibold text-gray-600 mb-6">Tanta University</h2>
@@ -47,7 +49,7 @@ export default function SignUp() {
                 placeholder="First Name"
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur} 
+                onBlur={formik.handleBlur}
                 required
               />
               {formik.touched.firstName && formik.errors.firstName ? (
@@ -63,7 +65,7 @@ export default function SignUp() {
                 placeholder="Last Name"
                 value={formik.values.lastName}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur} 
+                onBlur={formik.handleBlur}
                 required
               />
               {formik.touched.lastName && formik.errors.lastName ? (
@@ -79,7 +81,7 @@ export default function SignUp() {
                 placeholder="Email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur} 
+                onBlur={formik.handleBlur}
                 required
               />
               {formik.touched.email && formik.errors.email ? (
@@ -95,7 +97,7 @@ export default function SignUp() {
                 className="form-control"
                 value={formik.values.password}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur} 
+                onBlur={formik.handleBlur}
                 required
               />
               {formik.touched.password && formik.errors.password ? (

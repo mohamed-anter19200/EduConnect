@@ -2,16 +2,15 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import SectionTitle from "../SectionTitle/SectionTitle";
 import LectureCard from '../LectureCard/LectureCard';
-import useNewest from '../../hooks/useNewest';
+import useNewest from '../../hooks/Student/useNewest';
 
 export default function NewestUpload() {
-   
-  const{data:videos} = useNewest();
+  const { data: videos } = useNewest();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
-
+  
   return (
     <motion.div
       ref={ref}

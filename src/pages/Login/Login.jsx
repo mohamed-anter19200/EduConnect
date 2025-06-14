@@ -4,13 +4,14 @@ import * as Yup from "yup";
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import {sendDataToLogIn} from '../../API/Auth/Auth'
+import { sendDataToLogIn } from '../../API/Auth/Auth';
 import { useContext } from "react";
 import { userContext } from "../../context/User.context";
+import { toast } from 'react-hot-toast';
 
 export default function Login() {
   const navigate = useNavigate();
-  const {setToken} = useContext(userContext)
+  const { setToken, setRole } = useContext(userContext);
 
   const formik = useFormik({
     initialValues: {
@@ -21,13 +22,13 @@ export default function Login() {
       email: Yup.string().required("Email is required").email("Email is invalid"),
       password: Yup.string().required("Password is required").min(8, "Password must be at least 8 characters"),
     }),
-    onSubmit: (values) => sendDataToLogIn(values, navigate, setToken), 
+    onSubmit: (values) => sendDataToLogIn(values, navigate, setToken, setRole, toast),
   });
 
   return (
     <>
       <div className="h-screen bg-gray-50 flex justify-center items-center">
-         <motion.div
+        <motion.div
           className="container w-[90%] mx-auto md:w-1/3 bg-white md:p-8 p-5 rounded-lg shadow-2xl"
           initial={{ opacity: 0, y: -300 }} 
           animate={{ opacity: 1, y: 0 }}  
@@ -36,7 +37,7 @@ export default function Login() {
           <h2 className="text-center text-2xl font-semibold text-gray-600 mb-6">Tanta University</h2>
 
           <form onSubmit={formik.handleSubmit}>
-             <div className="relative mb-3">
+            <div className="relative mb-3">
               <input
                 type="email"
                 id="email"
@@ -44,7 +45,7 @@ export default function Login() {
                 placeholder="Email"
                 value={formik.values.email}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur} 
+                onBlur={formik.handleBlur}
                 required
               />
               {formik.touched.email && formik.errors.email ? (
@@ -60,7 +61,7 @@ export default function Login() {
                 className="form-control"
                 value={formik.values.password}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur} 
+                onBlur={formik.handleBlur}
                 required
               />
               {formik.touched.password && formik.errors.password ? (

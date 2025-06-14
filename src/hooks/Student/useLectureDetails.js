@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getLectureDetails } from "../API/Student/Student";
+import { getLectureDetails } from "../../API/Student/Student";
 
 const useLectureDetails = (id) => {
   const { data, isLoading, isError, error } = useQuery({
@@ -17,4 +17,4 @@ const useLectureDetails = (id) => {
   return { data, isLoading, isError, error };
 };
 
-export default useLectureDetails;
+export default useLectureDetails; 

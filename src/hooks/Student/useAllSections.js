@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllSections } from "../API/Student/Student";
+import { getAllSections } from "../../API/Student/Student";
 
- const useAllSections = () => {
+const useAllSections = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["subjects"], 
     queryFn: getAllSections,  
@@ -15,4 +15,4 @@ import { getAllSections } from "../API/Student/Student";
   return { data, isLoading, isError };
 };
 
-export default useAllSections;
+export default useAllSections; 
